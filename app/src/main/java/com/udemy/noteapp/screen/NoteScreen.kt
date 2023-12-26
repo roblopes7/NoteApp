@@ -25,6 +25,7 @@ import com.udemy.noteapp.components.NoteButton
 import com.udemy.noteapp.components.NoteInputText
 import com.udemy.noteapp.data.NoteDataSource
 import com.udemy.noteapp.model.Note
+import com.udemy.noteapp.util.formatDate
 import java.time.format.DateTimeFormatter
 
 @Composable
@@ -128,8 +129,8 @@ fun NoteRow(
             ) {
                 Text(text = note.title, style = MaterialTheme.typography.subtitle2)
                 Text(text = note.description, style = MaterialTheme.typography.subtitle1)
-//                Text(text = note.entryDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyyy"))
-//                    , style = MaterialTheme.typography.caption) //Brasil pattern
+                Text(text = formatDate(note.entryDate.time)
+                    , style = MaterialTheme.typography.caption) //Brasil pattern
         }
     }
 }
