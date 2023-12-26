@@ -2,25 +2,26 @@ package com.udemy.noteapp.data
 
 import androidx.room.*
 import com.udemy.noteapp.model.Note
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NoteDatabaseDao {
 
     @Query("SELECT * FROM notes")
-    fun getNotes(): List<Note>
+    fun getNotes(): Flow<List<Note>>
 
     @Query("SELECT * FROM notes WHERE id = :id")
-    fun getNoteById(id: String): Note
+    suspend fun getNoteById(id: String): Note
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(note: Note)
+    suspend fun insert(note: Note)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun update(note: Note)
+    suspend fun update(note: Note)
 
     @Query("DELETE FROM notes")
-    fun deleteAll()
+    suspend fun deleteAll()
 
     @Delete
-    fun deleteNote(note: Note)
+    suspend fun deleteNote(note: Note)
 }
